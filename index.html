@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+       
+
+        <title> La Tuerca </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <!-- CSS de Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <!-- JS y dependencias de Bootstrap (jQuery y Popper.js) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJj9/6OpWIb4kUE6Twag" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6pBONLZbPWt1l0M/EJ3MumcDJQ2E5R" crossorigin="anonymous"></script>
+
+       <!--CSS-->
+       <style>
+        ul,ol{
+            list-style: none;
+        }
+        body{
+            font-family: Open sans;
+        }
+        #slider{
+           
+            max-width: 100%;
+            margin: 5 auto;
+        }
+        #slider li,ul{
+            width: 100%;
+        }
+        #slider li img{
+            width: 70%;
+        }
+        #slider .caption{
+            position:absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding: 15px 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            z-index: 1;
+        }
+        #slider .caption h1{
+            font-size: 50px;
+        }
+        #slider .caption{
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        .pagination{
+            position:absolute;
+            top: 102%;
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+        }
+        .pagination li{
+          font-size: 50px;
+          margin: 2px 5px; 
+          color:#858585;
+          cursor:pointer ; 
+        }
+        .left, .right{
+            position:absolute;
+            top: 0;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            font-size: 35px;
+            cursor: pointer;
+            z-index:2;
+        }
+        .left{
+          left: 10px;  
+        }
+        .right{
+            right: 10px;
+        }
+        #tabs {
+            color: #007BFF; /* Color azul */
+        }
+
+        
+
+       </style>
+
+       <!--Jquery-->
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script>
+          
+            $(document).ready(function(){
+                var imgItems= $('.slider li').length;
+                var imgPos = 1;
+               //Agregando paginación
+               for(i=1; i<=imgItems; i++){
+                $('.pagination').append('<li><span class="&#8226"></span></li>');
+                }
+                $('.slider li').hide(); //ocultamos los slides
+                $('.slider li:first').show(); //Mostramos el primer slide
+                $('.pagination li:first').css({'color': '#CD6E2E'})
+              
+                // Ejecutando todas las funciones
+                $('.pagination  li').click(pagination);
+                $('.right span').click(nextSlider);
+                $('.left span').click(prevSlider);
+
+
+
+                //Funciones =======================================
+
+                function pagination(){
+                    var paginationPos = $(this).index()+1;
+                    $('.slider li').hide();
+                    $('.slider li:nth-child('+paginationPos+')').fadeIn();
+                    //Estilos a la paginación
+                    $('.pagination li').css({'color':  '#858585'});
+                    $(this).css({'color': '#CD6E2E'});
+
+                }
+
+
+                function nextSlider(){
+                    if(imgPos >= imgItems){ imgPos=1;}
+                    else{imgPos++;}
+                    
+                    $('.pagination li').css({'color':  '#858585'});
+                    $('.pagination li:nth-child(' + imgPos +')').css({'color':  '#858585'});
+                    
+
+                    $('.slider li').hide();
+                    $('.slider li:nth-child('+ imgPos +')').fadeIn()
+               }
+               function prevSlider(){
+                    if(imgPos >= imgItems){ imgPos=1;}
+                    else{imgPos++;}
+                    
+                    $('.pagination li').css({'color':  '#858585'});
+                    $('.pagination li:nth-child(' + imgPos +')').css({'color':  '#858585'});
+                    
+
+                    $('.slider li').hide();
+                    $('.slider li:nth-child('+ imgPos +')').fadeIn()
+               }
+               $( function() {
+                $( "#tabs" ).tabs();
+                } );
+
+
+             });
+        </script>
+
+    </head>
+    <body>
+       <!--navbar-->
+       
+            <div class="container text-center mt-5">
+                <div class="container-fluid navbar navbar-dark bg-dark">
+                    <nav class="navbar navbar-expand-lg container sticky-top">
+                        <a class="navbar-brand ml-auto" href="#"><img src="Imagenes/logo.jpg" height="200" width="200"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav ml-auto">
+                                <a class="nav-item nav-link active" href="Estropexia.html">Nosotros</a>
+                                <a class="nav-item nav-link" href="Productos.html">Productos</a>
+                                <a class="nav-item nav-link" href="Ordenar.html">Ordenar</a>
+                                <a class="nav-item nav-link" href="registrarme.html">Registrarme</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+			
+     <!--navbar-->
+
+     <!--Carrusel de Imagenes-->
+     <div class="container mx-auto text-center mt-5">
+        <div class="container-fluid navbar navbar-dark bg">
+            <div class="slideshow" id="slider">
+                <ul class="slider" >
+                    <li>
+                        <img src="Imagenes/Imagen productos/pinzas.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> Pinzas</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+
+                    <li>
+                        <img src="Imagenes/Imagen productos/51piezas.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> Kit</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+
+                    <li>
+                        <img src="Imagenes/Imagen productos/8piezas.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> 8 Piezas kit</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+
+                    <li>
+                        <img src="Imagenes/Imagen productos/electricista.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> Kit Electricista</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+
+                    <li>
+                        <img src="Imagenes/Imagen productos/manuales.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> Kit Manuales</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+                    <li>
+                        <img src="Imagenes/Imagen productos/juego de escuadras.jpg" alt="CEPILLO">
+                        <section class="caption">
+                            <h1> Juegos de escuadra</h1>
+                            <p> Precio Economico </p>
+                            
+                        </section>
+                    </li>
+                </ul>
+                <ol class="pagination">
+                    <li>&#8226;</li>
+                    <li>&#8226;</li>
+                    <li>&#8226;</li>
+                    <li>&#8226;</li>
+                    <li>&#8226;</li>
+                    <li>&#8226;</li>
+                </ol>
+                
+                <div class="left">
+                    <span>&#9664;</span>
+                </div>
+                
+                <div class="right">
+                    <span>&#9654;</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<!-- Fin de carrusel de imagenes-->
+♠
+<!-- Tabs-->
+<div class="container mx-auto text-center mt-5">
+    <div class="container-fluid bg-dark text-white p-4">
+        <div id="tabs">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tabs-1-tab" data-toggle="pill" href="#tabs-1">sobre nosotros 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabs-2-tab" data-toggle="pill" href="#tabs-2">sobre nosotros 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabs-3-tab" data-toggle="pill" href="#tabs-3">sobre nostros 3</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-4">
+                <div class="tab-pane fade show active" id="tabs-1">
+                    <p class="lead text-primary">Somos una ferretería reconocida nacionalmente</p>
+                </div>
+                <div class="tab-pane fade show active" id="tabs-2">
+                    <p class="lead text-primary">En nuestros Sucursales encontrará lo mejor para su domicilio</p>
+                </div>
+                <div class="tab-pane fade show active" id="tabs-3">
+                    <p class="lead text-primary">Que esperas para acercarte ya ...</p>
+                    <p class="lead text-primary">Te esperamos con las mejores opciones...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin tabs-->
+
+     <!-- footer-->
+     <footer class="bg text-light py-4">
+        
+        <div class="container mx-auto text-center mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-info">Contacto</h5>
+                    <p class="text-info">Correo:gabrielbaez023@gmail.com</p>
+                    <p class="text-info">Teléfono: (0971) 559-584</p>
+                </div>
+               
+                <div class="col-md-4">
+                    <h5 class="text-info">Redes Sociales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" target="_blank">Facebook</a></li>
+                        <li><a href="#" target="_blank">Twitter</a></li>
+                        <li><a href="#" target="_blank">LinkedIn</a></li>
+                        <li><a href="#" target="_blank">Instagram</a></li> 
+                    </ul>
+                    
+                </div>
+            </div>
+            <hr class="my-4">
+            <p class="small text-info">&copy; 2023 LA TUERCA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </body>
+</html>
